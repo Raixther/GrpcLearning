@@ -21,10 +21,12 @@ namespace GrpcLearning.Interceptors
                 $"Method: {context.Method}.");
             try
             {
+                _logger.LogInformation($"Status {context.Status.StatusCode}");
                 return await continuation(request, context);
             }
             catch (Exception ex)
             {
+                _logger.LogInformation($"Status {context.Status.StatusCode}");
                 _logger.LogError(ex, $"Error thrown by {context.Method}.");
                 throw;
             }
