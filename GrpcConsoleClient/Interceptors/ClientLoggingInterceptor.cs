@@ -6,11 +6,11 @@ namespace GrpcConsoleClient.Interceptors
 {
     internal class ClientLoggingInterceptor : Interceptor
     {
-        private readonly ILogger _logger;
+        private readonly ILogger<ClientLoggingInterceptor> _logger;
 
-        public ClientLoggingInterceptor(ILoggerFactory loggerFactory)
+        public ClientLoggingInterceptor(ILogger<ClientLoggingInterceptor> logger)
         {
-            _logger = loggerFactory.CreateLogger<ClientLoggingInterceptor>();
+            _logger = logger;
         }
 
         public override AsyncUnaryCall<TResponse> AsyncUnaryCall<TRequest, TResponse>(
