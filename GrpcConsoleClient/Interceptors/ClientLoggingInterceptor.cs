@@ -1,13 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-using Grpc.Core.Interceptors;
+﻿using Grpc.Core.Interceptors;
 using Grpc.Core;
 using Microsoft.Extensions.Logging;
-using static Grpc.Core.Interceptors.Interceptor;
 
 namespace GrpcConsoleClient.Interceptors
 {
