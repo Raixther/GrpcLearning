@@ -6,10 +6,13 @@ using GrpcLearning;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Configuration;
 
 using IHost host = Host.CreateDefaultBuilder(args).ConfigureServices(services=>{
     services.AddLogging();
     services.AddScoped<ClientLoggingInterceptor>();
+}).ConfigureAppConfiguration(conf=>{
+    conf.AddJsonFile("appsettings.json");
 }).Build();
 
 
