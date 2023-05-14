@@ -3,7 +3,6 @@ using Grpc.Core.Interceptors;
 using Grpc.Net.Client;
 using GrpcConsoleClient.Interceptors;
 using GrpcLearning;
-using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -12,11 +11,13 @@ using IHost host = Host.CreateDefaultBuilder(args).ConfigureServices(services=>{
     services.AddLogging();
     services.AddScoped<ClientLoggingInterceptor>();
 }).ConfigureAppConfiguration(conf=>{
-    conf.AddJsonFile("appsettings.json");
+    conf.AddJsonFile("appsettings.json");  
 }).Build();
 
 
-var channel = GrpcChannel.ForAddress("https://localhost:7214");
+IConfiguration configuration = host.Services.GetRequiredService<IConfiguration>();
+
+var channel = GrpcChannel.ForAddress(configuration.GetConnectionString("GrpcConnection"));
 var invoker = channel.Intercept(host.Services.GetRequiredService<ClientLoggingInterceptor>());  
 var client = new Greeter.GreeterClient(invoker);
 var result = await client.SayHelloAsync(new HelloRequest(){ Name= "Q"});
