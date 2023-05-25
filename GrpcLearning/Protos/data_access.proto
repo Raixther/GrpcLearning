@@ -1,0 +1,17 @@
+syntax = "proto3";
+
+option csharp_namespace = "DataAccess";
+
+package greet;
+
+//получить текст из txt файла
+service Reader {
+  rpc GetDataFromText (GetDataFromTextRequest) returns (GetDataFromTextResponse);
+}
+message GetDataFromTextRequest {
+  string path = 1;
+} 
+
+message GetDataFromTextResponse {
+  string content = 1;
+}
